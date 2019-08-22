@@ -7,21 +7,22 @@ url = 'https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNR3QwTlRFU0JYcG
 r = requests.get(url)
 web_content = r.text
 
-
 soup = BeautifulSoup(web_content,'lxml')
-
 a_tags = soup.find_all('a',class_='DY5T1d')
 
-# print(a_tags)
-
-titleList = []
 
 # print news titles
+titleList = []
+
 for tag in a_tags:
   titleList = titleList + [tag.string]
-
 print(titleList)
 
+# print news links
+newsList = []
 
-# titleList = [tag.text for tag in a_tags]
-# print(titleList)
+for tag in a_tags:
+  newsList = newsList + [tag.get('href')]
+print(newsList)
+
+
