@@ -15,14 +15,23 @@ a_tags = soup.find_all('a',class_='DY5T1d')
 # print news titles
 titleList = []
 
-for tag in a_tags:
-  titleList = titleList + [tag.string]
+for title in a_tags:
+  titleList = titleList + [title.string]
 print(titleList)
 
 
-# print news links
-newsList = []
+# get news links in html
+linkList = []
 
-for tag in a_tags:
-	newsList = newsList + [tag.get('href')]
-print(newsList)
+for link in a_tags:
+	linkList = linkList + [link.get('href')]
+#print(linkList)
+
+
+# fix links to normal url format
+rawLink = []
+
+for i in linkList:
+	rawLink = rawLink + [i.replace('.','https://news.google.com',1)]
+
+print(rawLink)
