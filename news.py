@@ -1,6 +1,7 @@
 import requests 
 from bs4 import BeautifulSoup
 import pandas as pd
+import os
  
 # get website content
 url = 'https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNR3QwTlRFU0JYcG9MVlJYS0FBUAE?hl=zh-TW&gl=TW&ceid=TW%3Azh-Hant'
@@ -17,7 +18,7 @@ titleList = []
 
 for title in a_tags:
   titleList = titleList + [title.string]
-print(titleList)
+#print(titleList)
 
 
 # get news links in html
@@ -33,5 +34,18 @@ rawLink = []
 
 for i in linkList:
 	rawLink = rawLink + [i.replace('.','https://news.google.com',1)]
+#print(rawLink)
 
-print(rawLink)
+
+df = pd.DataFrame(
+{
+    'title': titleList,
+    'links': rawLink
+})
+ 
+print(df)
+
+
+# output result to CSV file
+os.getcwd()
+df.to_csv('Result.csv', encoding = 'utf_8_sig') 
