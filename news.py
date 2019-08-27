@@ -49,3 +49,17 @@ print(df)
 # output result to CSV file
 os.getcwd()
 df.to_csv('Result.csv', encoding = 'utf_8_sig') 
+
+
+# get news content
+url2 = df['links'][0]
+print(url2)
+r = requests.get(url2)
+web_content = r.text
+soup = BeautifulSoup(web_content,'lxml')
+#print(soup)
+
+
+# find all the P in news
+newsContent = soup.find_all('p')
+print(newsContent)
